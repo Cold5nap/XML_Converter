@@ -1,2 +1,12 @@
 ﻿<h3>@ViewBag.Message</h3>
-@Html.Raw(@ViewBag.Raw)
+<form class="form-control" asp-action="Save" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <div id="tableWrapper">
+        @Html.Raw(@ViewBag.Raw)
+    </div>
+    <input id="hiddenData" type="hidden" name="text"/>
+    <input type="hidden" name="path" value="@ViewBag.Path" />
+    <input type="submit" value="Сохранить изменения" />
+</form>
+
+
+<script src="~/js/editTable.js"></script>

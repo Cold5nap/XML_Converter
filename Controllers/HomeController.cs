@@ -60,7 +60,12 @@ namespace XML_Converter.Controllers
             string xml = _appEnvironment.WebRootPath + $"\\Files\\{fileName}.xml";
             string xslt = _appEnvironment.WebRootPath + "\\Files\\Stylesheets_1.xslt";
             string pathToHtml = $"{_appEnvironment.WebRootPath}\\Files\\Transform\\{fileName}.html";
-            TransformXMLToHTML(pathToHtml, xml, xslt);
+
+            if (!System.IO.File.Exists(pathToHtml))
+            {
+                TransformXMLToHTML(pathToHtml, xml, xslt);
+            }
+
             var fi = new FileInfo(pathToHtml);
             // Обновляем информацию о запрошенном файле.
             fi.Refresh();
@@ -77,6 +82,7 @@ namespace XML_Converter.Controllers
                 return new EmptyResult();
             }
         }
+
 
         public async Task<ActionResult> Save(string text,string path)
         {
@@ -107,8 +113,8 @@ namespace XML_Converter.Controllers
             string xml = _appEnvironment.WebRootPath + $"\\Files\\{fileName}.xml";
             string xslt = _appEnvironment.WebRootPath + "\\Files\\Stylesheets_1.xslt";
             string pathToHtml = $"{_appEnvironment.WebRootPath}\\Files\\Transform\\{fileName}.html";
+            ViewBag.Path = pathToHtml;
             ViewBag.Title = "Содержимое файла"; 
-            TransformXMLToHTML(pathToHtml, xml, xslt);
             //преобразуем файл если не был преобразован
             if (!System.IO.File.Exists(pathToHtml))
             {
@@ -154,12 +160,21 @@ namespace XML_Converter.Controllers
         public ActionResult DeleteFile(int id)
         {
             FileModel f = _context.file.Find(id);
+            string pathToHtml = $"{_appEnvironment.WebRootPath}\\Files\\Transform\\{f.name}.html";
 
+            //удаление xml
             if (System.IO.File.Exists(f.path))
             {
                 System.IO.File.Delete(f.path);
             }
 
+            //удаление html
+            if (System.IO.File.Exists(pathToHtml))
+            {
+                System.IO.File.Delete(pathToHtml);
+            }
+
+            //Удаление записи о файле из базы данных
             if (f != null)
             {
                 _context.file.Remove(f);

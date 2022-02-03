@@ -9,7 +9,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Таблица Html</th>
+            <th scope="col">Типы</th>
             <th scope="col">Название</th>
             <th scope="col">Действие</th>
         </tr>
@@ -21,8 +21,8 @@
             <tr>
                 <td>
 
-                    @Html.ActionLink("Посмотреть", "Select", "Home", new { fileName = file.name }, null)<br>
-                    @Html.ActionLink("Редактировать", "Edit", "Home", new { filePath = file.path }, null)
+                    @Html.ActionLink("Редактировать HTML", "Select", "Home", new { fileName = file.name }, null)<br>
+                    @Html.ActionLink("Редактировать XML", "Edit", "Home", new { filePath = file.path }, null)
                 </td>
                 <td>@file.name</td>
                 <td>
