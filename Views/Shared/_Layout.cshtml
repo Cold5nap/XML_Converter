@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link type="text/css" rel="stylesheet" href="~/css/bootstrap.min.css" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class=" shadow-sm">
+                <div class="container">
+                    <a asp-controller="Home" style='text-decoration: none;' asp-action="Index" class="">
+                        <h3 class="h3">Главная</h3>
+                    </a>
+
+                </div>
+            </div>
+        </header>
+        <div>
+            @RenderBody()
+        </div>
+        <footer class="text-muted py-5 ">
+            <p class="float-end mb-1">
+                <a href="#">Переместиться наверх</a>
+            </p>
+            Связь с разработчиком:
+            <p class="mb-1"><a href="and.andr2013@yandex.ru">and.andr2013@yandex.ru</a></p>
+            <p class="mb-1"><a href="cold5nap@icloud.com">cold5nap@icloud.com</a></p>
+        </footer>
+    </div>
+    <script src="~/js/bootstrap.min.js"></script>
+</body>
+</html>

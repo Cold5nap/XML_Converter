@@ -1,0 +1,44 @@
+﻿<h5>Выберите файл для загрузки</h5>
+<form class="form-horizontal" asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <input type="file" name="uploadedFile" /><br>
+    <input type="submit" value="Загрузить" />
+</form>
+
+<h5>Загруженные файлы</h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Таблица Html</th>
+            <th scope="col">Название</th>
+            <th scope="col">Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var file in Model.allFiles)
+        {
+            <tr>
+                <td>
+
+                    @Html.ActionLink("Посмотреть", "Select", "Home", new { fileName = file.name }, null)<br>
+                    @Html.ActionLink("Редактировать", "Edit", "Home", new { filePath = file.path }, null)
+                </td>
+                <td>@file.name</td>
+                <td>
+                    <form class="form-horizontal" asp-action="DeleteFile" asp-controller="Home" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="@file.id" /><br>
+                        <input type="submit" value="Удалить" />
+                    </form>
+                        
+                    
+                    <form class="form-horizontal" asp-action="Download" asp-controller="Home" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="fileName" value="@file.name" /><br>
+                        <input type="submit" value="Скачать html" />
+                    </form>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

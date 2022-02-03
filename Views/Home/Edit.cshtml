@@ -1,0 +1,6 @@
+﻿<h5>Редактирование файла</h5>
+<form class="form-control" asp-action="Save" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <textarea rows="30" cols="100" name="text">@ViewBag.Raw</textarea>
+    <input type="hidden" name="path"   value="@ViewBag.Path" />
+    <input type="submit" value="Сохранить изменения" />
+</form>
